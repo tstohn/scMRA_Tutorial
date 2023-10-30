@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>scCNR_Tutorial copy</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>scCNR_Tutorial</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14636,9 +14636,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="n">dataBRAF</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BRAFmut."</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dataBRAF</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
 
 <span class="c1">#calculate input: deviatipon of protein from cell population mean</span>
-<span class="n">controlPopulation</span> <span class="o">=</span> <span class="n">dataWT</span>
-<span class="n">additionalPopulations</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataBRAF</span><span class="p">]</span>
-<span class="n">dataScaled</span><span class="p">,</span> <span class="n">groupAnnot</span> <span class="o">=</span> <span class="n">scmra</span><span class="o">.</span><span class="n">prepare_data</span><span class="p">(</span><span class="n">controlPopulation</span><span class="p">,</span> <span class="n">dataList</span> <span class="o">=</span> <span class="n">additionalPopulations</span><span class="p">,</span> <span class="n">groupList</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BRAFmut"</span><span class="p">])</span>
+<span class="n">populations</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataWT</span><span class="p">,</span> <span class="n">dataBRAF</span><span class="p">]</span>
+<span class="c1">#later we also have to access the populations specific rloc values by these labels</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Ctr"</span><span class="p">,</span> <span class="s2">"BRAFmut"</span><span class="p">]</span>
+<span class="n">dataScaled</span><span class="p">,</span> <span class="n">groupAnnot</span> <span class="o">=</span> <span class="n">scmra</span><span class="o">.</span><span class="n">prepare_data</span><span class="p">(</span><span class="n">populations</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
 
 <span class="c1">#get active protein deviations (frmo those we infer interaction strengths)</span>
 <span class="n">rglob</span> <span class="o">=</span> <span class="n">dataScaled</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataScaled</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="s2">"Active"</span> <span class="ow">in</span> <span class="n">n</span><span class="p">)]]</span>
